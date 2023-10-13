@@ -1,3 +1,4 @@
+import * as pg from "pg";
 import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
 
@@ -18,6 +19,7 @@ const sequelize = new Sequelize({
   password: process.env.db_password,
   host: process.env.db_host,
   dialect: "postgres",
+  dialectModule: pg,
 });
 
 export { sequelize };
