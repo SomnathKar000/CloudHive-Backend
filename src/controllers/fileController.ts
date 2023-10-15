@@ -25,10 +25,10 @@ const uploadFile = async (req: AuthenticatedRequest, res: Response) => {
   if (!exists) {
     throw new AppError("File not found", 404);
   }
-  await createFileData(userId, fileName, fileType);
+  const file = await createFileData(userId, fileName, fileType);
   res
     .status(200)
-    .json({ success: true, message: "File uploaded successfully" });
+    .json({ success: true, message: "File uploaded successfully", file });
 };
 const getPreSignedUrl = async (req: AuthenticatedRequest, res: Response) => {
   const { fileName, fileType } = req.body;
@@ -49,7 +49,9 @@ const getPreSignedUrl = async (req: AuthenticatedRequest, res: Response) => {
 
 const getAllFiles = async (req: AuthenticatedRequest, res: Response) => {
   const files = await getAllFilesData(req.user?.id);
-  res.status(200).json({ success: true, message: "files fetched", files });
+  res
+    .status(200)
+    .json({ success: true, message: "Files fetched successfully", files });
 };
 
 const getFile = async (req: AuthenticatedRequest, res: Response) => {

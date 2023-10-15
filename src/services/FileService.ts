@@ -23,7 +23,8 @@ const createFileData = async (
   contentType: string
 ) => {
   validateUserId(userId);
-  await File.create({ userId, fileName, contentType });
+  const file = await File.create({ userId, fileName, contentType });
+  return file;
 };
 
 const getAllFilesData = async (userId: string | undefined) => {

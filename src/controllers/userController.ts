@@ -38,14 +38,12 @@ const loginUser = async (req: Request, res: Response) => {
     name: existingUser.name,
     email: existingUser.email,
   };
-  res
-    .status(200)
-    .json({
-      success: true,
-      message: "User logged in succesfully",
-      user,
-      token,
-    });
+  res.status(200).json({
+    success: true,
+    message: "User logged in succesfully",
+    user,
+    token,
+  });
 };
 
 const getUser = async (req: AuthenticatedRequest, res: Response) => {
@@ -61,7 +59,11 @@ const getUser = async (req: AuthenticatedRequest, res: Response) => {
   }
   res
     .status(200)
-    .json({ success: true, message: "user fetched", user: existingUser });
+    .json({
+      success: true,
+      message: "User fetched succesfully",
+      user: existingUser,
+    });
 };
 
 const updateUser = async (req: AuthenticatedRequest, res: Response) => {
