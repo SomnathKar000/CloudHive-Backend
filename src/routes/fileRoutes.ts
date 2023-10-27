@@ -5,6 +5,7 @@ import {
   getFile,
   deleteFile,
   getAllFiles,
+  toggleStar,
 } from "../controllers/fileController";
 import {
   presignedUrlValidation,
@@ -21,6 +22,7 @@ router
 router
   .route("/presigned-url")
   .post(presignedUrlValidation, handleValidationErrors, getPreSignedUrl);
+router.route("/toggle-star/:fileName").put(toggleStar);
 router
   .route("/:fileName")
   .get(getAndDeleteFileValidation, handleValidationErrors, getFile);

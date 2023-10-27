@@ -50,4 +50,25 @@ const getAllFilesData = async (userId: string | undefined) => {
   return files;
 };
 
-export { createPath, deleteFileData, createFileData, getAllFilesData };
+const toggleStarService = async (
+  userId: string | undefined,
+  fileName: string
+) => {
+  validateUserId(userId);
+  const file = await File.findOne({ where: { userId, fileName } });
+  console.log(file, fileName, userId);
+  if (file) {
+    file.starred = !file.starred;
+    await file.save();
+  } else {
+    throw new AppError("File not found", 404);
+  }
+};
+
+export {
+  createPath,
+  deleteFileData,
+  createFileData,
+  getAllFilesData,
+  toggleStarService,
+};

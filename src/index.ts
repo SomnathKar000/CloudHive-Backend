@@ -7,7 +7,7 @@ import fileRoutes from "./routes/fileRoutes";
 import { authenticate } from "./middleware/authentication";
 import { errorHandler, notFound } from "./middleware/errorHandling";
 import { sequelize } from "./utils/database";
-
+import { port } from "./utils/config";
 const app = express();
 
 // Middleware
@@ -21,8 +21,6 @@ app.use("/api/v1/files", [authenticate, fileRoutes]);
 // Error handling middleware
 app.use(errorHandler);
 app.use(notFound);
-
-const port = process.env.PORT || 5000;
 
 const start = async () => {
   try {

@@ -10,6 +10,7 @@ import {
   deleteFileData,
   createFileData,
   getAllFilesData,
+  toggleStarService,
 } from "../services/FileService";
 import { AuthenticatedRequest } from "../middleware/authentication";
 import { AppError } from "../middleware/errorHandling";
@@ -75,4 +76,19 @@ const deleteFile = async (req: AuthenticatedRequest, res: Response) => {
   res.status(200).json({ success: true, message: "File deleted successfully" });
 };
 
-export { uploadFile, getPreSignedUrl, getFile, getAllFiles, deleteFile };
+const toggleStar = async (req: AuthenticatedRequest, res: Response) => {
+  const { fileName } = req.params;
+  await toggleStarService(req.user?.id, fileName);
+  res
+    .status(200)
+    .json({ success: true, message: "File starred toggled successfully" });
+};
+
+export {
+  uploadFile,
+  getPreSignedUrl,
+  getFile,
+  getAllFiles,
+  deleteFile,
+  toggleStar,
+};
